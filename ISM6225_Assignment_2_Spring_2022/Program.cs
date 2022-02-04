@@ -236,8 +236,29 @@ namespace ISM6225_Assignment_2_Spring_2022
         {
             try
             {
-                //write your code here.
-                return 0;
+                Dictionary<int, int> dic = new Dictionary<int, int>();
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    
+                    if (dic.ContainsKey(arr[i]))
+                    {
+                        dic[arr[i]] += 1;
+                    }
+                    else
+                        dic[arr[i]] = 1;
+                }
+                int max = -1;
+                foreach (var val in dic)
+                {
+                    if(val.Key == val.Value)
+                    {
+                        if(val.Key > max)
+                        {
+                            max = val.Key;
+                        }
+                    }
+                }
+                return max;
             }
             catch (Exception)
             {
