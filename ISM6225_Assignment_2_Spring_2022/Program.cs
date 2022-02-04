@@ -181,9 +181,28 @@ namespace ISM6225_Assignment_2_Spring_2022
             try
             {
                 
-                //write your code here.
-
-                return "";
+                Dictionary<string,int> dic = new Dictionary<string, int>();
+                paragraph = paragraph.Replace("!", "").Replace("?", "").Replace("'", "").Replace(",", "").Replace(".", "").Replace(";", "").ToLower();
+                string[] a = paragraph.Split(' ');
+                for(int i = 0; i < a.Length; i++)
+                {
+                    if (banned.Contains(a[i]))
+                    {
+                        continue;
+                    }
+                    if (dic.ContainsKey(a[i])) {
+                        dic[a[i]] += 1;
+                    }
+                    else
+                        dic[a[i]] = 1;
+                }
+                KeyValuePair<string, int> max = new KeyValuePair<string, int>();
+                foreach (var val in dic)
+                {
+                    if (val.Value > max.Value)
+                        max = val;
+                }
+                return max.Key;
             }
             catch (Exception)
             {
