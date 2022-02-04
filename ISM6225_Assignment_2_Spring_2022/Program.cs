@@ -132,8 +132,25 @@ namespace ISM6225_Assignment_2_Spring_2022
         {
             try
             {
-                //Write your Code here.
-                return -1;
+                int l = 0;
+                int r = nums.Length-1;
+                int i = (l + r) / 2;
+                while (l <= r)
+                {
+                    if (nums[i] == target)
+                    {
+                        return i;
+                    }
+                    else if(nums[i] < target){
+                        l = i + 1;
+                    }
+                    else
+                    {
+                        r = i - 1;
+                    }
+                    i = (l + r) / 2;
+                }
+                return r+1;
             }
             catch (Exception)
             {
