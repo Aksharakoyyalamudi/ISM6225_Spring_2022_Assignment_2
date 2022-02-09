@@ -368,8 +368,22 @@ namespace ISM6225_Assignment_2_Spring_2022
             try
             {
                 //write your code here.
+                int c = 0;
+                int l = 1;
+                for (int i = 0; i < s.Length; i++)
+                {
+                    int a = widths[s[i] - 'a'];
+                    c += a;
+                    if (c > 100)
+                    {
+                        c = a;
+                        l += 1;
+                    }
 
-                return new List<int>() { };
+                }
+                var k = new List<int>() { l,c};
+                return k;
+
             }
             catch (Exception)
             {
