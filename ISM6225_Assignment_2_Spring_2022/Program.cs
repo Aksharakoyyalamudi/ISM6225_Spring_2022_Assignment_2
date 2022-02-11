@@ -420,7 +420,49 @@ namespace ISM6225_Assignment_2_Spring_2022
         {
             try
             {
-                //write your code here.
+                Dictionary<char, char> dic = new Dictionary<char, char>();   
+                dic.Add('{', '}');
+                dic.Add('(', ')');
+                dic.Add('[', ']');
+                char[] open = { '(', '{', '[' };
+                List<char> list = new List<char>();
+                foreach (char c in bulls_string10) { 
+                    if(open.Contains(c))
+                    {
+                        
+                        list.Add(c);
+                    }
+                    else
+                    {
+                        
+                        if(list.Count != 0)
+                        {
+                            int len = list.Count;
+                            
+                            
+                            char p = list[len-1];
+                            
+                            
+                            list.RemoveAt(len-1);
+                            
+                            
+                            if(c != dic[p])
+                            {
+                                return false;
+                            }
+
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    
+                }
+                if (list.Count == 0)
+                {
+                    return true;
+                }
 
                 return false;
             }
