@@ -463,9 +463,28 @@ namespace ISM6225_Assignment_2_Spring_2022
         {
             try
             {
-                //write your code here.
-
-                return 0;
+                string[] MORSE = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
+                 "....", "..", ".---", "-.-", ".-..", "--", "-.",
+                 "---", ".--.", "--.-", ".-.", "...", "-", "..-",
+                 "...-", ".--", "-..-", "-.--", "--.." };
+                Dictionary<String, int> keyValuePairs = new Dictionary<String, int>();
+                foreach (string word in words)
+                {
+                    String m = "";
+                    foreach(Char c in word)
+                    {
+                        m += MORSE[c - 'a'];
+                    }
+                    if (keyValuePairs.ContainsKey(m))
+                    {
+                        keyValuePairs[m] += 1;
+                    }
+                    else
+                    {
+                        keyValuePairs[m] = 1;
+                    }
+                }
+                return keyValuePairs.Count;
             }
             catch (Exception)
             {
