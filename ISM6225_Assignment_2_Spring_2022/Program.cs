@@ -486,6 +486,7 @@ namespace ISM6225_Assignment_2_Spring_2022
         {
             try
             {
+             //using the dictionary maintained the valid pairs and array of open brackets to check the validity.
                 Dictionary<char, char> dic = new Dictionary<char, char>();   
                 dic.Add('{', '}');
                 dic.Add('(', ')');
@@ -575,6 +576,7 @@ namespace ISM6225_Assignment_2_Spring_2022
                  "....", "..", ".---", "-.-", ".-..", "--", "-.",
                  "---", ".--.", "--.-", ".-.", "...", "-", "..-",
                  "...-", ".--", "-..-", "-.--", "--.." };
+             //maintaining a array for all the morse codes. and using the dictionary maintained the morse code of every word as key and occurences as value.
                 Dictionary<String, int> keyValuePairs = new Dictionary<String, int>();
                 foreach (string word in words)
                 {
