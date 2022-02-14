@@ -132,6 +132,7 @@ namespace ISM6225_Assignment_2_Spring_2022
         {
             try
             {
+             //used the binary search technique to find the target.
                 int l = 0;
                 int r = nums.Length-1;
                 int i = (l + r) / 2;
@@ -180,10 +181,12 @@ namespace ISM6225_Assignment_2_Spring_2022
         {
             try
             {
-                
+                //first replacing all the special characters with empty string.
                 Dictionary<string,int> dic = new Dictionary<string, int>();
                 paragraph = paragraph.Replace("!", "").Replace("?", "").Replace("'", "").Replace(",", "").Replace(".", "").Replace(";", "").ToLower();
+             //splitting the sentence intlo array by space.
                 string[] a = paragraph.Split(' ');
+               //by using the dictionary maintaining the word and number of times it occured in the sentence and only if the word is not in banned.
                 for(int i = 0; i < a.Length; i++)
                 {
                     if (banned.Contains(a[i]))
@@ -196,6 +199,7 @@ namespace ISM6225_Assignment_2_Spring_2022
                     else
                         dic[a[i]] = 1;
                 }
+             // from the dictionary entries finding the maximum occured word.
                 KeyValuePair<string, int> max = new KeyValuePair<string, int>();
                 foreach (var val in dic)
                 {
@@ -236,6 +240,7 @@ namespace ISM6225_Assignment_2_Spring_2022
         {
             try
             {
+             // maintained a dictionary to find the occurences of a number and returing the number equal to occurences.
                 Dictionary<int, int> dic = new Dictionary<int, int>();
                 for (int i = 0; i < arr.Length; i++)
                 {
@@ -292,8 +297,42 @@ namespace ISM6225_Assignment_2_Spring_2022
         {
             try
             {
-                //write your code here.
-                return "";
+                Dictionary<char, int> dic = new Dictionary<char, int>();
+
+                for (var i = 0; i < secret.Length; i++)
+                {
+                    if (dic.ContainsKey(secret[i]))
+                        dic[secret[i]]++;
+                    else
+                        dic.Add(secret[i], 1);
+                }
+
+                var m = 0;
+                var n = 0;
+                for (var i = 0; i < guess.Length; i++)
+                {
+                    if (guess[i] == secret[i])
+                    {
+                        n++;
+                        dic[guess[i]]--;
+                        if (dic[guess[i]] < 0)
+                        {
+                            m--;
+                        }
+                        continue;
+                    }
+
+                    if (dic.ContainsKey(guess[i]))
+                    {
+                        if (dic[guess[i]] > 0)
+                        {
+                            m++;
+                            dic[guess[i]]--;
+                        }
+                    }
+                }
+
+                return $"{n}A{m}B";
             }
             catch (Exception)
             {
@@ -322,9 +361,36 @@ namespace ISM6225_Assignment_2_Spring_2022
         {
             try
             {
-                //write your code here.
-                
-                return new List<int>() {} ;
+             //using a dictionary storing the last occurences of every letetr in the string.
+                Dictionary<Char, int> keyValuePairs = new Dictionary<Char, int>();
+                List<int> final = new List<int>();
+                int Index = 0;
+                int helper = 0;
+                for (int i  = 0; i < s.Length; i++)
+                {
+                    if (!keyValuePairs.ContainsKey(s[i]))
+                        keyValuePairs.Add(s[i], i);
+                    else
+                        keyValuePairs[s[i]] = i;
+                }
+             //by using the index variable maintaing the latest occurence of the letter if it is equal to the current index then storing the current index to final array.
+                for (int i = 0; i < s.Length; i++)
+                {
+                    if (Index< keyValuePairs[s[i]])
+                    {
+                        Index = keyValuePairs[s[i]];
+                    }
+                    if(Index == i)
+                    {
+                        final.Add(i-helper+1);
+                        helper = i+1 ;
+                    }
+
+                    
+
+                }
+
+                return final;
             }
             catch (Exception)
             {
